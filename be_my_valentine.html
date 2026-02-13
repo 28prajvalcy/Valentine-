@@ -46,22 +46,23 @@
         let yesBtn = document.getElementById("yesBtn");
         let noBtn = document.getElementById("noBtn");
         let question = document.getElementById("question");
-        let size = 18;
+        let yesBtnSize = 18;
 
         noBtn.addEventListener("click", function() {
-            question.innerText = "Pls plz 🥺";
+            noBtn.innerText = "Please Please 🥺";
+            yesBtnSize += 20;
+            yesBtn.style.fontSize = yesBtnSize + "px";
+            yesBtn.style.padding = yesBtnSize/2 + "px " + yesBtnSize + "px";
+
+            if(yesBtnSize > 200){
+                yesBtn.style.fontSize = yesBtnSize + "px";
+            }
         });
 
         yesBtn.addEventListener("click", function() {
-            size += 20;
-            yesBtn.style.fontSize = size + "px";
-            yesBtn.style.padding = size/2 + "px " + size + "px";
-
-            if(size > 200){
-                document.body.innerHTML = "<h1 style='margin-top:200px;'>I always knew it ❤️😍</h1>";
-            }
+            document.body.innerHTML = "<h1 style='margin-top:200px;'>Yes I knew it ❤️😍</h1>";
         });
-    <\/script>
+    </script>
 
 </body>
 </html>
