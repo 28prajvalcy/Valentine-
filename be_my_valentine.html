@@ -1,68 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Be My Valentine ❤️</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine</title>
     <style>
         body {
-            text-align: center;
             font-family: Arial, sans-serif;
-            background-color: #ffe6f0;
-            overflow: hidden;
+            background-color: #ffcccb;
+            text-align: center;
+            padding: 20px;
         }
-
-        h1 {
-            margin-top: 100px;
-            font-size: 30px;
+        .heart {
+            display: inline-block;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            position: relative;
+            border-radius: 50%;
+            margin: 10px;
+            transition: transform 0.3s;
         }
-
-        .btn {
-            padding: 10px 20px;
-            font-size: 18px;
-            margin: 20px;
-            cursor: pointer;
-            border: none;
-            border-radius: 8px;
+        .heart:before, .heart:after {
+            content: '';
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            border-radius: 50%;
+            position: absolute;
         }
-
-        #yesBtn {
-            background-color: #ff4d88;
-            color: white;
+        .heart:before {
+            left: 50px;
+            top: 0;
         }
-
-        #noBtn {
-            background-color: #999;
-            color: white;
+        .heart:after {
+            left: 0;
+            top: 50px;
+        }
+        .heart:hover {
+            transform: scale(1.1);
         }
     </style>
 </head>
 <body>
-
-    <h1 id="question">Will you be my Valentine? ❤️</h1>
-
-    <button class="btn" id="yesBtn">Yes 💘</button>
-    <button class="btn" id="noBtn">No 😢</button>
-
+    <h1>Be My Valentine!</h1>
+    <div class="heart" id="heart"></div>
     <script>
-        let yesBtn = document.getElementById("yesBtn");
-        let noBtn = document.getElementById("noBtn");
-        let question = document.getElementById("question");
-        let yesBtnSize = 18;
+        const heart = document.getElementById('heart');
 
-        noBtn.addEventListener("click", function() {
-            noBtn.innerText = "Please Please 🥺";
-            yesBtnSize += 20;
-            yesBtn.style.fontSize = yesBtnSize + "px";
-            yesBtn.style.padding = yesBtnSize/2 + "px " + yesBtnSize + "px";
+        // Function to handle touch end event
+        function handleTouchEnd() {
+            alert('Happy Valentine\u2019s Day!');
+        }
 
-            if(yesBtnSize > 200){
-                yesBtn.style.fontSize = yesBtnSize + "px";
-            }
-        });
-
-        yesBtn.addEventListener("click", function() {
-            document.body.innerHTML = "<h1 style='margin-top:200px;'>Yes I knew it ❤️😍</h1>";
-        });
+        // Add event listeners for touchend
+        heart.addEventListener('touchend', handleTouchEnd);
     </script>
-
 </body>
 </html>
