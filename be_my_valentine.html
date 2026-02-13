@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Be My Valentine ❤️</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: Arial, sans-serif;
+            background-color: #ffe6f0;
+            overflow: hidden;
+        }
+
+        h1 {
+            margin-top: 100px;
+            font-size: 30px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            font-size: 18px;
+            margin: 20px;
+            cursor: pointer;
+            border: none;
+            border-radius: 8px;
+        }
+
+        #yesBtn {
+            background-color: #ff4d88;
+            color: white;
+        }
+
+        #noBtn {
+            background-color: #999;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 id="question">Will you be my Valentine? ❤️</h1>
+
+    <button class="btn" id="yesBtn">Yes 💘</button>
+    <button class="btn" id="noBtn">No 😢</button>
+
+    <script>
+        let yesBtn = document.getElementById("yesBtn");
+        let noBtn = document.getElementById("noBtn");
+        let question = document.getElementById("question");
+        let size = 18;
+
+        noBtn.addEventListener("click", function() {
+            question.innerText = "Pls plz 🥺";
+        });
+
+        yesBtn.addEventListener("click", function() {
+            size += 20;
+            yesBtn.style.fontSize = size + "px";
+            yesBtn.style.padding = size/2 + "px " + size + "px";
+
+            if(size > 200){
+                document.body.innerHTML = "<h1 style='margin-top:200px;'>I always knew it ❤️😍</h1>";
+            }
+        });
+    <\/script>
+
+</body>
+</html>
