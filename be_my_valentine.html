@@ -15,7 +15,7 @@
     body {
         height: 100vh;
         width: 100vw;
-        overflow: hidden; /* FIX SCREEN */
+        overflow: hidden;
         font-family: Arial, sans-serif;
         background: linear-gradient(135deg, #ffe6f0, #ffcce0);
         display: flex;
@@ -40,7 +40,7 @@
 
     .btn {
         border: none;
-        border-radius: 8px;
+        border-radius: 10px;
         cursor: pointer;
         position: fixed;
         transition: 0.3s ease;
@@ -53,7 +53,7 @@
         padding: 12px 25px;
         left: 50%;
         top: 65%;
-        transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%) scale(1);
     }
 
     #noBtn {
@@ -61,6 +61,19 @@
         color: white;
         font-size: 16px;
         padding: 10px 20px;
+    }
+
+    /* Heartbeat animation */
+    @keyframes heartbeat {
+        0%   { transform: translate(-50%, -50%) scale(var(--scale)); }
+        25%  { transform: translate(-50%, -50%) scale(calc(var(--scale) + 0.1)); }
+        50%  { transform: translate(-50%, -50%) scale(var(--scale)); }
+        75%  { transform: translate(-50%, -50%) scale(calc(var(--scale) + 0.1)); }
+        100% { transform: translate(-50%, -50%) scale(var(--scale)); }
+    }
+
+    .beating {
+        animation: heartbeat 0.8s infinite;
     }
 
     .successScreen {
@@ -73,6 +86,7 @@
         color: white;
         background: linear-gradient(135deg, #ff4d88, #ff0066);
     }
+
 </style>
 </head>
 <body>
@@ -80,7 +94,7 @@
 <h1>Medha will you be my Valentine? ❤️</h1>
 <div id="pleaseText"></div>
 
-<button class="btn" id="yesBtn">Yes 💘</button>
+<button class="btn beating" id="yesBtn">Yes 💘</button>
 <button class="btn" id="noBtn">No 😢</button>
 
 <script>
@@ -92,11 +106,10 @@ let pleaseText = document.getElementById("pleaseText");
 let scale = 1;
 let clickCount = 0;
 
-// Move NO safely inside screen
+// Move NO safely
 function moveNoButton() {
 
     let yesRect = yesBtn.getBoundingClientRect();
-
     let maxX = window.innerWidth - noBtn.offsetWidth;
     let maxY = window.innerHeight - noBtn.offsetHeight;
 
@@ -105,8 +118,7 @@ function moveNoButton() {
     do {
         x = Math.random() * maxX;
         y = Math.random() * maxY;
-    } 
-    while (
+    } while (
         x < yesRect.right &&
         x + noBtn.offsetWidth > yesRect.left &&
         y < yesRect.bottom &&
@@ -117,7 +129,6 @@ function moveNoButton() {
     noBtn.style.top = y + "px";
 }
 
-// Initial NO position
 moveNoButton();
 
 function handleNoClick() {
@@ -125,13 +136,12 @@ function handleNoClick() {
     clickCount++;
     pleaseText.innerText = "Please ".repeat(clickCount) + "🥺";
 
-    // Increase YES size using scale (NO SCREEN EXPAND)
-    scale += 0.3;
-    yesBtn.style.transform = `translate(-50%, -50%) scale(${scale})`;
+    scale += 0.25;
+
+    yesBtn.style.setProperty('--scale', scale);
 
     moveNoButton();
 
-    // Hide NO if YES becomes huge
     if (scale > 4) {
         noBtn.style.display = "none";
     }
